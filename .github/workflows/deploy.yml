@@ -8,8 +8,26 @@ on:
       - main 
 
 jobs:
-  build:
+  testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+
+      - name: Lint check
+        run: npm run lint 
+
+      - name: Check build
+        run: npm run build 
+
+  deploy:
     if: github.event.pull_request.merged == true
+    needs: testing
     runs-on: ubuntu-latest
     steps:
       -
