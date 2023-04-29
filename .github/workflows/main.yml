@@ -1,4 +1,4 @@
-name: ci
+name: Deploy image
 
 on:  
   pull_request:
@@ -6,7 +6,6 @@ on:
       - closed
     branches:
       - main 
-
 
 jobs:
   build:
